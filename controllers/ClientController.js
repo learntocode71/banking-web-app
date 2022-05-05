@@ -30,8 +30,7 @@ const getAllClient = async (req, res) => {
 const getClient = async (req, res, next) => {
   const { clientId } = req.params;
 
-  if (!req.user.isAdmin || (!req.user.isAdmin && req.user.id !== clientId))
-    return res.sendStatus(401);
+  if (!req.user.isAdmin && req.user.id !== clientId) return res.sendStatus(401);
 
   const client = await findRecordById(clientId);
 
@@ -59,8 +58,7 @@ const createClient = async (req, res, next) => {
 const updateClient = async (req, res, next) => {
   const { clientId } = req.params;
 
-  if (!req.user.isAdmin || (!req.user.isAdmin && req.user.id !== clientId))
-    return res.sendStatus(401);
+  if (!req.user.isAdmin && req.user.id !== clientId) return res.sendStatus(401);
 
   // Make service call to update client details
   const client = await updateRecord(clientId, req.body);

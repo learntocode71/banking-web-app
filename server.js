@@ -3,6 +3,7 @@ require("express-async-errors");
 require("dotenv").config();
 const cors = require("cors");
 require("./config/passport");
+const bodyParser = require("body-parser");
 
 const connectDB = require("./config/connectDB");
 const notFoundMiddleware = require("./middlewares/notFoundMiddleware");
@@ -16,6 +17,7 @@ const port = process.env.PORT || 5000;
 
 // middlewares
 app.use(cors());
+app.use(bodyParser({ limit: "5mb" }));
 app.use(express.json());
 
 // routes
